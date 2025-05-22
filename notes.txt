@@ -12,3 +12,45 @@ conmand is npm create vite
 to start project cd into it then run npm run dev
 
 folder structure
+
+how to add bootstarp and scss to react project
+
+after project is created install bootstarp@latest and sass@latest
+
+link bootstrap.css & bootstarp.bundle.min.js from downloaded files from node_modules
+usign import statement
+
+create a .sass/.scss file then import it
+
+steps to use tailwind with react
+
+step 1 : create react project
+step 2 : install tailwind dependencies
+npm install -D tailwindcss@3 postcss autoprefixer
+
+step 3 : init the tailwind
+npx tailwindcss init -p
+
+it will create two files 
+tailwind.config.js
+postcss.config.js
+
+edit tailwind.config.js
+content: [
+    "./index.html",
+    "./src/**/*.{js,ts,jsx,tsx}",
+],
+
+replace content with this
+
+step 4 : add this in index.css 
+
+custom theme(font and color)
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities
+
+any gobal style
+
+step 5 : restart the server (npm run dev)

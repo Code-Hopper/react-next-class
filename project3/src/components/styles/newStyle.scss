@@ -1,0 +1,9 @@
+.parent{
+    background-color: black;
+    >.text-1{
+        color: purple !important;
+        font-size: 2rem;
+        font-weight: bold;
+        text-shadow: 0 0 10px white;
+    }
+}
