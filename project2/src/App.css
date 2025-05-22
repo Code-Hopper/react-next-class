@@ -1,0 +1,9 @@
+:root {
+    --color1: 100, 100, 255;
+    --color2: 100, 100, 50;
+    --color3: #0f0f0f;
+}
+
+.content-container {
+    padding: 1rem 4rem;
+}

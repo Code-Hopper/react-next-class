@@ -1,0 +1,14 @@
+to create a react project
+2 methods
+
+1.using npx create-react-app app-name
+command is npx create-react-app app-name
+
+to start project cd into it then run npm start command 
+
+2.via vite
+conmand is npm create vite
+
+to start project cd into it then run npm run dev
+
+folder structure

@@ -1,0 +1,8 @@
+1.we can send only single html element in render function, so make a container element like div
+2.main.jsx is the entry point for our development server if we change anything in it browser will have to reload to fetch updates.
+
+CSR - client side rendering
+
+module based programming has import and export | named & default
+
+3.style

@@ -1,0 +1,3 @@
+npm - node package manager
+npx - node package extension
+jsx - javaScript Syntax Extension (a page where we can write html and js at the time)
