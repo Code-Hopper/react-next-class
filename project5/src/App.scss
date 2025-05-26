@@ -1,0 +1,32 @@
+#pop-up {
+    
+    // display: none;
+
+    // &.showPopUp{
+    //     display: initial;
+    // }
+
+    width: 300px;
+    border: 2px solid black;
+    border-radius: 4px;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    .header {
+        background-color: black;
+        color: white;
+        display: flex;
+        padding: 1rem 1rem;
+        justify-content: space-between;
+    }
+ 
+    .pop-up-body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        padding: 1rem;
+        background-color: white;
+        height: 300px;
+    }   
+}

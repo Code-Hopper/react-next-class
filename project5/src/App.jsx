@@ -1,43 +1,55 @@
 import React from 'react'
 import { useState } from 'react'
 
-
+import "./App.scss"
+import Table from './Table'
 
 const App = () => {
 
   // let [data, setData] = useState(0)
   // let [inputValue, setInputValue] = useState("")
 
+  let [show, setShow] = useState({
+    status: false,
+    userData: {
+      name: "",
+      phone: ""
+    }
+  })
+
+  let [entries, setEntries] = useState([])
+
   let [formData, setFormData] = useState({
     name: "",
     phone: ""
   })
 
-  let [entries, setEntries] = useState([])
-
-  // let handleChange = (event) => {
-  //   console.log(event)
-  //   console.log(event.target.placeholder)
-  //   setInputValue(event.target.value)
-  // }
-
   let handleChange = (e) => {
     let { name, value } = e.target
-
     setFormData((prev) => {
       return { ...prev, [name]: value }
     })
-
   }
 
-  let handleSubmit = (e) => {
-    e.preventDefault()
-    console.log(formData)
-
+  let handleSumit = (event) => {
+    event.preventDefault()
     setEntries((prev) => {
       return [...prev, formData]
     })
 
+    setShow(true)
+  }
+
+  let displayRow = (props) => {
+
+    console.log(props)
+
+    return (
+      <tr key={props.index}>
+        <td>{props.name}</td>
+        <td>{props.phone}</td>
+      </tr>
+    )
   }
 
   return (
@@ -56,28 +68,34 @@ const App = () => {
 
       {/* <input onChange={handleChange} type="text" value={inputValue} placeholder='enter something' /> */}
 
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSumit}>
 
-        <input onChange={handleChange} placeholder='enter name' type="text" name='name' value={formData.name} />
+        <input onChange={handleChange} type="text" placeholder='enter name' name='name' value={formData.name} />
 
-        <input onChange={handleChange} placeholder='enter phone' type="tel" name='phone' value={formData.phone} />
+        <input onChange={handleChange} type="text" placeholder='enter phone' name='phone' value={formData.phone} />
 
-        <button>submit</button>
+        <button>Submit</button>
 
       </form>
 
-      <table border={1}>
-        {
-          entries.map((entry,index)=>{
-            return (
-              <tr key={index}>
-                <td>{entry.name}</td>
-                <td>{entry.phone}</td>
-              </tr>
-            )
-          })
-        }
-      </table>
+
+      <Table entries={entries} togglePopHandler={setShow}/>
+
+      {/* <div id='pop-up' className={`${show ? "showPopUp" : null}`}> */}
+
+      {
+        show.status ?
+          <div id='pop-up'>
+            <div className='header'>
+              <span>Welcome</span>
+              <button onClick={() => { setShow(false) }}>close</button>
+            </div>
+            <div className='pop-up-body'>
+              <span>{show.userData.name}</span>
+              <span>{show.userData.phone}</span>
+            </div>
+          </div> : null
+      }
 
     </div>
   )
