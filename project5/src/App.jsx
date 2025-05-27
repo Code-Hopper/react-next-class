@@ -1,5 +1,5 @@
 import React from 'react'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 
 import "./App.scss"
 import Table from './Table'
@@ -52,6 +52,12 @@ const App = () => {
     )
   }
 
+  useEffect(()=>{
+
+    alert("Welcome to the app")
+
+  },[])
+
   return (
     <div>
 
@@ -79,7 +85,7 @@ const App = () => {
       </form>
 
 
-      <Table entries={entries} togglePopHandler={setShow}/>
+      <Table entries={entries} togglePopHandler={setShow} />
 
       {/* <div id='pop-up' className={`${show ? "showPopUp" : null}`}> */}
 
