@@ -54,3 +54,15 @@ custom theme(font and color)
 any gobal style
 
 step 5 : restart the server (npm run dev)
+
+state
+controlled and un-controlled component
+
+state sharing
+
+form
+validatation
+
+useEffect hook
+
+ReactRouter
