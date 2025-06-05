@@ -10,6 +10,11 @@ const GetWeather = () => {
         lon: ''
     })
 
+    let [resposeManagement, setResposeManagement] = useState({
+        loading: false,
+        error: false
+    })
+
     let [result, setResult] = useState(false);
 
     let handleChange = (e) => {
@@ -30,11 +35,34 @@ const GetWeather = () => {
 
     let getLatestWeatherData = async () => {
         try {
-            let result = await CurrentWeatherData(formdData.lat, formdData.lon);
-            console.log("Latest weather data: ", result);
-            setResult(result);
+
+            setResposeManagement({
+                loading: true,
+                error: false
+            })
+
+            setTimeout(async () => {
+                let result = await CurrentWeatherData(formdData.lat, formdData.lon);
+                console.log("Latest weather data: ", result);
+                setResult(result);
+
+
+                if(!result){
+                    throw ("unable to get data for provided cor...")
+                }
+
+                setResposeManagement({
+                    loading: false,
+                    error: false
+                })
+            }, 3000)
+
         } catch (err) {
             console.error("Error fetching weather data: ", err);
+            setResposeManagement({
+                loading: false,
+                error: err
+            })
         }
     }
 
@@ -43,8 +71,8 @@ const GetWeather = () => {
             <div className='bg-white text-black p-4 rounded-lg'>
                 <h2 className='font-bold text-xl'>Weather Information</h2>
                 <h3>in {props.data.name}</h3>
-                
-                <h3 className={`${props.data.main.temp > 30 ? "text-red-500" : "text-blue-500" }`} >temp is {props.data.main.temp} <sup>o</sup>C </h3>
+
+                <h3 className={`${props.data.main.temp > 30 ? "text-red-500" : "text-blue-500"}`} >temp is {props.data.main.temp} <sup>o</sup>C </h3>
             </div>
         )
     }
@@ -65,9 +93,17 @@ const GetWeather = () => {
 
             </form>
 
-            {
-                result ? <WeatherCard data={result} /> : null
-            }
+            <div className='p-4 relative'>
+
+                {
+                    resposeManagement.loading ? <h1 className='text-red-500 font-bold position-absolute'>loading...</h1> : null
+                }
+
+                {
+                    result ? <WeatherCard data={result} /> : resposeManagement.error
+                }
+
+            </div>
 
         </div>
     )
