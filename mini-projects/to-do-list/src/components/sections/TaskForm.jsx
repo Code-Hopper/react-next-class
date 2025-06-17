@@ -9,14 +9,18 @@ import { FaXmark } from 'react-icons/fa6'
 
 const TaskForm = () => {
 
-    let [openForm, setOpenForm] = useState(true)
+    let [openForm, setOpenForm] = useState(false)
 
     let [formData, setFormData] = useState({
         title: "",
         discription: "",
         priority: "",
         time: "",
-        message: ""
+        message: "",
+        status: {
+            completed: false,
+            deleted: false
+        }
     })
 
     let { tasks, saveTasks } = useTask()

@@ -162,4 +162,11 @@
       }
     }
   }
+
+  .task-row{
+    >td.completed{
+      text-decoration: line-through;
+    }
+  }
+
 }

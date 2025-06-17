@@ -25,8 +25,37 @@ const TaskProvider = ({ children }) => {
     })
   }
 
+  const updateCompletedtask = (taskId, checked) => {
+  
+    let localTasks = localStorage.getItem("tasks")
+
+    let updatedTasks = []
+
+    if (localTasks) {
+      updatedTasks = JSON.parse(localTasks); // convert string back to array
+    }
+
+    updatedTasks = updatedTasks.map((task, index) => {
+      if (taskId === index) {
+        return {
+          ...task,
+          status: {
+            ...task.status,
+            completed: checked
+          }
+        }
+      }
+      return task
+    })
+
+    localStorage.setItem("tasks", JSON.stringify(updatedTasks))
+
+    // Update React state so UI will re-render
+    setTasks(updatedTasks)
+  }
+
   return (
-    <TaskContext.Provider value={{ tasks, saveTasks }}>
+    <TaskContext.Provider value={{ tasks, saveTasks, updateCompletedtask }}>
       {children}
     </TaskContext.Provider>
   )

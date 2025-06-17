@@ -1,9 +1,16 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { useTask } from '../../contextAPI/Task'
 
 const DisplayTasksTable = () => {
 
-    let { tasks } = useTask()
+    let { tasks, updateCompletedtask } = useTask()
+
+    let handleTaskCompleted = (event, taskId) => {
+
+        let { checked } = event.target
+
+        updateCompletedtask(taskId, checked)
+    }
 
     return (
         <>
@@ -23,17 +30,18 @@ const DisplayTasksTable = () => {
 
                         {
                             Array.isArray(tasks) ? tasks.map((task, index) => {
+
                                 return (
                                     <>
-                                        <tr className='' key={index}>
-                                            <td>{index}</td>
-                                            <td>{task.title}</td>
-                                            <td>{task.discription}</td>
-                                            <td>{task.time}</td>
-                                            <td>{task.priority}</td>
-                                            <td>{`${task.message ? task.message : "no message"}`}</td>
+                                        <tr className='task-row' key={index}>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{index}</td>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.title}</td>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.discription}</td>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.time}</td>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.priority}</td>
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{`${task.message ? task.message : "no message"}`}</td>
                                             <td className='!text-center'>
-                                                <input type="checkbox" />
+                                                <input onChange={(event) => handleTaskCompleted(event, index)} type="checkbox" name='completed' checked={task.status.completed} />
                                             </td>
                                             <td className='flex gap-2'>
                                                 <button className='bg-[rgba(50,50,200)] px-3 py-1 text-secondaryBackgroundColor'>Edit</button>
