@@ -26,7 +26,7 @@ const TaskProvider = ({ children }) => {
   }
 
   const updateCompletedtask = (taskId, checked) => {
-  
+
     let localTasks = localStorage.getItem("tasks")
 
     let updatedTasks = []
@@ -54,8 +54,31 @@ const TaskProvider = ({ children }) => {
     setTasks(updatedTasks)
   }
 
+
+  let deleteTask = (taskId) => {
+    let updatedArrayAfterDelete = tasks.filter((task, index) => {
+      return index !== taskId
+    })
+    localStorage.setItem("tasks", JSON.stringify(updatedArrayAfterDelete))
+    setTasks(updatedArrayAfterDelete)
+  }
+
+  let updateTask = (taskId, data) => {
+    let updatedEditTasks = tasks.map((task,index)=>{
+      if(index === taskId){
+        return {
+          ...tasks,
+          ...data
+        }
+      }
+      return task
+    })
+    localStorage.setItem("tasks", JSON.stringify(updatedEditTasks))
+    setTasks(updatedEditTasks)
+  }
+
   return (
-    <TaskContext.Provider value={{ tasks, saveTasks, updateCompletedtask }}>
+    <TaskContext.Provider value={{ tasks, saveTasks, updateCompletedtask, deleteTask, updateTask }}>
       {children}
     </TaskContext.Provider>
   )

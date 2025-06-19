@@ -165,7 +165,8 @@
 
   .task-row{
     >td.completed{
-      text-decoration: line-through;
+      // text-decoration: line-through;
+      background-color: green;
     }
   }
 

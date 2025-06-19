@@ -3,13 +3,38 @@ import { useTask } from '../../contextAPI/Task'
 
 const DisplayTasksTable = () => {
 
-    let { tasks, updateCompletedtask } = useTask()
+    let { tasks, updateCompletedtask, deleteTask, updateTask } = useTask()
+
+    let [notEditable, setNotEditable] = useState(true)
+
+    let [editData, setEditData] = useState({
+        title: "",
+        time: "",
+        discription: "",
+        priority: ""
+    })
 
     let handleTaskCompleted = (event, taskId) => {
 
         let { checked } = event.target
 
         updateCompletedtask(taskId, checked)
+    }
+
+    let handleDeleteTask = (taskId) => {
+        deleteTask(taskId)
+    }
+
+    let handleSaveEdit = (taskId) => {
+        console.log(editData)
+        updateTask(taskId, editData)
+    }
+
+    let handleEditChange = (e) => {
+        let { name, value } = e.target
+        setEditData((prev) => {
+            return { ...prev, [name]: value }
+        })
     }
 
     return (
@@ -35,17 +60,41 @@ const DisplayTasksTable = () => {
                                     <>
                                         <tr className='task-row' key={index}>
                                             <td className={`${task.status.completed ? "completed" : "pending"}`} >{index}</td>
-                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.title}</td>
-                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.discription}</td>
-                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.time}</td>
-                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >{task.priority}</td>
+
+                                            {
+                                                notEditable ? <td> <span> {task.title} </span> </td> : <td className={`${task.status.completed ? "completed" : "pending"}`} ><input onChange={handleEditChange} type="text" name="title" value={editData.title} disabled={notEditable} /> </td>
+                                            }
+
+                                            {
+                                                notEditable ? <td><span>{task.discription}</span> </td> : <td className={`${task.status.completed ? "completed" : "pending"}`} ><input onChange={handleEditChange} type="text" name='discription' value={editData.discription} disabled={notEditable} /> </td>
+                                            }
+
+                                            {
+                                                notEditable ? <td> <span>{task.time}</span> </td> : <td className={`${task.status.completed ? "completed" : "pending"}`} ><input onChange={handleEditChange} type="datetime-local" name='time' value={editData.time} disabled={notEditable} /> </td>
+                                            }
+
+                                            <td className={`${task.status.completed ? "completed" : "pending"}`} >
+                                                {/* <input type="text" value={task.priority} /> */}
+                                                <select onChange={handleEditChange} name="priority" id="" disabled={notEditable}>
+                                                    <option value={task.priority}>{task.priority}</option>
+                                                    <option value="not important">not important</option>
+                                                    <option value="just important">just important</option>
+                                                </select>
+                                            </td>
+
                                             <td className={`${task.status.completed ? "completed" : "pending"}`} >{`${task.message ? task.message : "no message"}`}</td>
+
                                             <td className='!text-center'>
                                                 <input onChange={(event) => handleTaskCompleted(event, index)} type="checkbox" name='completed' checked={task.status.completed} />
                                             </td>
+
                                             <td className='flex gap-2'>
-                                                <button className='bg-[rgba(50,50,200)] px-3 py-1 text-secondaryBackgroundColor'>Edit</button>
-                                                <button className='bg-accentColor text-secondaryBackgroundColor px-3 py-1'>Delete</button>
+                                                <button onClick={() => { setNotEditable(!notEditable) }} className='bg-[rgba(50,50,200)] px-3 py-1 text-secondaryBackgroundColor'>Edit</button>
+                                                <button onClick={(event) => { handleDeleteTask(index) }} className='bg-accentColor text-secondaryBackgroundColor px-3 py-1'>Delete</button>
+                                                {
+                                                    notEditable ? null :
+                                                        <button onClick={() => { handleSaveEdit(index) }} className='bg-[rgba(0,250,0)] px-3 py-1 text-black'>Save</button>
+                                                }
                                             </td>
                                         </tr>
                                         <tr>
