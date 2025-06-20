@@ -67,7 +67,7 @@ const TaskProvider = ({ children }) => {
     let updatedEditTasks = tasks.map((task,index)=>{
       if(index === taskId){
         return {
-          ...tasks,
+          ...task,
           ...data
         }
       }

@@ -76,7 +76,7 @@ const DisplayTasksTable = () => {
                                             <td className={`${task.status.completed ? "completed" : "pending"}`} >
                                                 {/* <input type="text" value={task.priority} /> */}
                                                 <select onChange={handleEditChange} name="priority" id="" disabled={notEditable}>
-                                                    <option value={task.priority}>{task.priority}</option>
+                                                    <option selected value={task.priority}>{task.priority}</option>
                                                     <option value="not important">not important</option>
                                                     <option value="just important">just important</option>
                                                 </select>
