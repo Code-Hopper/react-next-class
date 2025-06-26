@@ -1,0 +1,18 @@
+:root {
+  --primary: 13, 94, 166;
+  --secondary: 234, 166, 77;
+  --dull: 199, 138, 59;
+  --darkerSecondary: 161, 109, 40;
+  --light: 245, 245, 245;
+  --dark: 25, 25, 25;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgba(var(--light), 1);
+}

@@ -1,0 +1,3 @@
+this should be access retritected application that has a admin panel
+we should be able to CRUD a course 
+should be able to integrate a payment gateway
