@@ -1,0 +1,18 @@
+react topics 
+
+components (functional)
+import and export statements
+state variable
+
+react hooks
+useState useEffect useContext useCustom
+
+props(data can be passed through or within the function)(it's a object)
+
+router (react-router-dom)
+
+api calling (axios) | fetch() methods this is a native api calling methods for javascript
+
+env variable(encapsulated data)
+
+styling bootstrap and tailwind css | sass
